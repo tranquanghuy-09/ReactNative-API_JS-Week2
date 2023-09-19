@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+</head>
+
+<body>
+    <div>
+        <p id="show"></p>
+    </div>
+    <script>
+        // Update a user id=1
+        const urlHuyUserApp = "https://6509669ef6553137159b5c22.mockapi.io/api/v1/users";
+        var data = {};
+        data.firstname = "Trần";
+        data.lastname = "Huy";
+        var json = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", urlHuyUserApp + '/1', true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.onload = function () {
+            var users = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                console.table(users);
+                console.log("updated");
+            } else {
+                console.error(users);
+                console.log("not updated");
+            }
+        }
+        xhr.send(json);
+    </script>
+</body>
+
+</html>

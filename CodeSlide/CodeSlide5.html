@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p id="show"></p>
+    </div>
+    <script>
+        // "https://baconipsum.com/api/?type=all-meat";
+        const urlBacon = "https://jsonplaceholder.typicode.com/todos/1";
+        (function () {
+            $.ajax({
+                method: "GET",
+                url: urlBacon,
+                dataType: "json"
+            })
+            .done(function (data) {
+                console.log(data);
+            })
+            .fail(function () {
+                alert("no good");
+            });
+        })()
+
+    </script>
+</body>
+
+</html>
