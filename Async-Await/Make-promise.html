@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="img_1" src="" alt="">
+    <img id="img_2" src="" alt="">
+    <img id="img_3" src="" alt="">
+    <script>
+        function httpGetAsync(Url, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == XMLHttpRequest.DONE && xmlHttp.status == 200)
+                    callback(xmlHttp);
+            };
+            xmlHttp.open('GET', Url, true);
+            xmlHttp.send(null);
+        };
+        const myPromise1 = new Promise(function (relsolve, reject) {
+            httpGetAsync('https://picsum.photos/200/300', relsolve);
+        });
+        const myPromise2 = new Promise(function (relsolve, reject) {
+            httpGetAsync('https://picsum.photos/200/300', relsolve);
+        });
+        const myPromise3 = new Promise(function (relsolve, reject) {
+            httpGetAsync('https://picsum.photos/200/300', relsolve);
+        });
+        myPromise1
+            .then((data) => {
+                document.getElementById('img_1').setAttribute('src', data.responseURL);
+                return myPromise2;
+            })
+            .then((data) => {
+                document.getElementById('img_2').setAttribute('src', data.responseURL);
+                return myPromise3;
+            })
+            .then(
+                (data) => {
+                    document.getElementById('img_3').setAttribute('src', data.responseURL);
+                })
+
+    </script>
+</body>
+
+</html>
